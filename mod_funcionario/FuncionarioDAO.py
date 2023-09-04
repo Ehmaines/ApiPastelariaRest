@@ -14,7 +14,7 @@ def get_funcionario(id: int):
 @router.post("/funcionario/", tags=["Funcionário"])
 def post_funcionario(f: Funcionario):
     return {"msg": "post executado", "nome": f.nome, "cpf": f.cpf, "telefone": f.telefone }, 200
-
+#Eduardo Heiden Maines
 @router.put("/funcionario/{id}", tags=["Funcionário"])
 def put_funcionario(id: int, f: Funcionario):
     return {"msg": "put executado", "id": id, "nome": f.nome, "cpf": f.cpf, "telefone": f.telefone}, 201
