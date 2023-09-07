@@ -16,7 +16,6 @@ def get_funcionario():
         return {"erro": str(e)}, 400
     finally:
         session.close()
-        #return {"msg": "get todos executado"}, 200
 
 @router.get("/funcionario/{id}", tags=["Funcionário"])
 def get_funcionario(id: int):
