@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+import db
 from mod_funcionario.Funcionario import Funcionario
 from mod_funcionario.FuncionarioModel import FuncionarioDB
 
@@ -15,19 +16,24 @@ def get_funcionario():
         return {"erro": str(e)}, 400
     finally:
         session.close()
-        return {"msg": "get todos executado"}, 200
+        #return {"msg": "get todos executado"}, 200
 
 @router.get("/funcionario/{id}", tags=["Funcionário"])
 def get_funcionario(id: int):
-    return {"msg": "get um executado"}, 200
+    try:
+        session = db.Session()
+        dados = session.query(FuncionarioDB).filter(FuncionarioDB.id_funcionario == id).one()
+        return dados, 200
+    except Exception as e:
+        return {"erro": str(e)}, 400
+    finally:
+        session.close()
 
 @router.post("/funcionario/", tags=["Funcionário"])
 def post_funcionario(corpo: Funcionario):
     try:
         session = db.Session()
-        dados = FuncionarioDB(None, corpo.nome, corpo.matricula,
-
-        corpo.cpf, corpo.telefone, corpo.grupo, corpo.senha)
+        dados = FuncionarioDB(None, corpo.nome, corpo.matricula, corpo.cpf, corpo.telefone, corpo.grupo, corpo.senha)
 
         session.add(dados)
         session.commit()
@@ -43,8 +49,7 @@ def post_funcionario(corpo: Funcionario):
 def put_funcionario(id: int, corpo: Funcionario):
     try:
         session = db.Session()
-        dados = session.query(FuncionarioDB).filter(
-        FuncionarioDB.id_funcionario == id).one()
+        dados = session.query(FuncionarioDB).filter(FuncionarioDB.id_funcionario == id).one()
         dados.nome = corpo.nome
         dados.cpf = corpo.cpf
         dados.telefone = corpo.telefone
@@ -54,11 +59,25 @@ def put_funcionario(id: int, corpo: Funcionario):
         session.add(dados)
         session.commit()
         return {"id": dados.id_funcionario}, 200
-except Exception as e:
-session.rollback()
-return {"erro": str(e)}, 400
-finally:
-session.close()
+    except Exception as e:
+        session.rollback()
+        return {"erro": str(e)}, 400
+    finally:
+        session.close()
+        
 @router.delete("/funcionario/{id}", tags=["Funcionário"])
 def delete_funcionario(id: int):
-    return {"msg": "delete executado"}, 201
+    try:
+        session = db.Session()
+        
+        dados = session.query(FuncionarioDB).filter(FuncionarioDB.id_funcionario == id).one()
+        session.delete(dados)
+        session.commit()
+        
+        return {"id": dados.id_funcionario}, 200
+    
+    except Exception as e:
+        session.rollback()
+        return {"erro": str(e)}, 400
+    finally:
+        session.close()
