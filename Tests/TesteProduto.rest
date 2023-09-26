@@ -1,9 +1,15 @@
 ### Verbo GET – listar todos
 GET http://localhost:8000/produto/ HTTP/1.1
+x-token: EmainesToken231
+x-key: EmainesKey
 ### Verbo GET – listar um
 GET http://localhost:8000/produto/10 HTTP/1.1
+x-token: EmainesToken
+x-key: EmainesKey
 ### Verbo POST – adicionar
 POST http://127.0.0.1:8000/produto/ HTTP/1.1
+x-token: EmainesToken
+x-key: EmainesKey
 content-type: application/json
 
 {
@@ -14,6 +20,8 @@ content-type: application/json
 }
 ### Verbo PUT – atualiza
 PUT http://127.0.0.1:8000/produto/2 HTTP/1.1
+x-token: EmainesToken
+x-key: EmainesKey
 content-type: application/json
 
 {
@@ -24,3 +32,5 @@ content-type: application/json
 }
 ### Verbo DELETE - excluir
 DELETE http://127.0.0.1:8000/produto/3 HTTP/1.1
+x-token: EmainesToken
+x-key: EmainesKey
