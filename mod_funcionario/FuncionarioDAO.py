@@ -2,10 +2,12 @@ from fastapi import APIRouter
 import db
 from mod_funcionario.Funcionario import Funcionario
 from mod_funcionario.FuncionarioModel import FuncionarioDB
+from fastapi import Depends
+import security
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(security.verify_token), Depends(security.verify_key)])
 # Criar as rotas/endpoints: GET, POST, PUT, DELETE
-@router.get("/funcionario/", tags=["Funcionário"])
+@router.get("/funcionario/", tags=["Funcionário"], dependencies=[Depends(security.verify_key)])
 def get_funcionario():
     try:
         session = db.Session()

@@ -1,9 +1,15 @@
 ### Verbo GET – listar todos
 GET http://localhost:8000/funcionario/ HTTP/1.1
+x-token: EmainesToken
+x-key: EmainesKey
 ### Verbo GET – listar um
 GET http://localhost:8000/funcionario/10 HTTP/1.1
+x-token: EmainesToken
+x-key: EmainesKey
 ### Verbo POST – adicionar
 POST http://127.0.0.1:8000/funcionario/ HTTP/1.1
+x-token: EmainesToken
+x-key: EmainesKey
 content-type: application/json
 
 {
@@ -16,6 +22,8 @@ content-type: application/json
 }
 ### Verbo PUT – atualiza
 PUT http://127.0.0.1:8000/funcionario/2 HTTP/1.1
+x-token: EmainesToken
+x-key: EmainesKey
 content-type: application/json
 
 {
@@ -28,3 +36,5 @@ content-type: application/json
 }
 ### Verbo DELETE - excluir
 DELETE http://127.0.0.1:8000/funcionario/3 HTTP/1.1
+x-token: EmainesToken
+x-key: EmainesKey
