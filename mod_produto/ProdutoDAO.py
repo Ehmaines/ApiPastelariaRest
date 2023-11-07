@@ -39,7 +39,7 @@ def get_produto(id: int):
 def post_produto(p: Produto):
     try:
         session = db.Session()
-        dados = ProdutoDB(p.id_produto, p.nome, p.descricao, p.foto, p.valor_unitario)
+        dados = ProdutoDB(None, p.nome, p.descricao, p.foto, p.valor_unitario)
 
         session.add(dados)
         session.commit()

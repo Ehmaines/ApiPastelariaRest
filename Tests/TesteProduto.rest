@@ -28,7 +28,7 @@ content-type: application/json
 "nome" : "Bolinhas dos Testes",
 "descricao" : "12345678909",
 "foto" : "49898989",
-"valor_unitario" : 2
+"valor_unitario" : 12
 }
 ### Verbo DELETE - excluir
 DELETE http://127.0.0.1:8000/produto/3 HTTP/1.1
