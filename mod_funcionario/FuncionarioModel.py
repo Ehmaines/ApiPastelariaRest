@@ -26,8 +26,6 @@ class FuncionarioDB(db.Base):
         self.senha = senha
         
     def check_password(self, password: str) -> bool:
-        print(password)
-        print(self.senha)
         return password == self.senha
     
     def get_access_token(self) -> str:
