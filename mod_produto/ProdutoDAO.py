@@ -25,6 +25,7 @@ def get_produto():
 def get_produto(id: int):
     try:
         session = db.Session()
+        print("Teste")
         dados = session.query(ProdutoDB).filter(ProdutoDB.id_produto == id);
     
         return dados, 200
@@ -59,10 +60,12 @@ def post_produto(p: Produto):
 def put_produto(id: int, p: Produto):
     try:
         session = db.Session()
+        print("tranquilo")
         dados = session.query(ProdutoDB).filter(ProdutoDB.id_produto == id).one();
         dados.nome = p.nome
         dados.descricao = p.descricao
         dados.foto = p.foto
+        print("tranquilo Passou da foto")
         dados.valor_unitario = p.valor_unitario
     
         session.add(dados)
