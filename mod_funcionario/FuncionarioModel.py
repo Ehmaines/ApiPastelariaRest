@@ -26,8 +26,6 @@ class FuncionarioDB(db.Base):
         self.senha = senha
         
     def check_password(self, password: str) -> bool:
-        #hashed_password = Funcoes.cifraSenha(password)#scrypt.hash(password, salt, N=16384, r=8, p=1)
-        #print(hashed_password)
         print(password)
         print(self.senha)
         return password == self.senha

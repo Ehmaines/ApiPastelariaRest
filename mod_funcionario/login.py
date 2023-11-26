@@ -11,13 +11,15 @@ router = APIRouter()
 def login(corpo: Login):
     try:
         session = db.Session()
+        print("14")
         user = session.query(FuncionarioDB).filter_by(cpf=corpo.cpf).first()
         if not user:
-            raise HTTPException(status_code=401, detail="Usuário não encontrado")
+            print("16")
+            return {"erro": "Usuário ou senha incorretos"}, 400
         if not user.check_password(corpo.senha):
             print(user)
-            raise HTTPException(status_code=401, detail="Senha incorreta")
-        return {"access_token": user.get_access_token()}
+            return {"erro": "Usuário ou senha incorretos"}, 400
+        return {"access_token": user.get_access_token()}, 200
     except Exception as e:
         print(e)
         session.rollback()
