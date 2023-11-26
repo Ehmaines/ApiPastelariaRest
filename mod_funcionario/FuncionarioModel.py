@@ -1,5 +1,8 @@
 import db
 from sqlalchemy import Column, VARCHAR, CHAR, Integer
+from funcoes import Funcoes
+import jwt
+
 # ORM
 
 class FuncionarioDB(db.Base):
@@ -21,3 +24,26 @@ class FuncionarioDB(db.Base):
         self.telefone = telefone
         self.grupo = grupo
         self.senha = senha
+        
+    def check_password(self, password: str) -> bool:
+        #hashed_password = Funcoes.cifraSenha(password)#scrypt.hash(password, salt, N=16384, r=8, p=1)
+        #print(hashed_password)
+        print(password)
+        print(self.senha)
+        return password == self.senha
+    
+    def get_access_token(self) -> str:
+        payload = {
+            "id_funcionario": self.id_funcionario,
+            "nome": self.nome,
+            "cpf": self.cpf,
+            "grupo": self.grupo,
+            "matricula": self.matricula,
+            "telefone": self.telefone,
+        }
+        token = jwt.encode(
+            payload,
+            "EmainesSecretKey",
+            algorithm="HS256",
+        )
+        return token
